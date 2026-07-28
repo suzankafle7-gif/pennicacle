@@ -1,8 +1,1 @@
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
-  ]
-}
+"build": "npx @tanstack/router-cli generate && vite build"
