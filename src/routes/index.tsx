@@ -3,7 +3,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { readFile, writeFile } from "node:fs/promises";
 
-// ─── Server: read business name ──
+// ── Server: read business name ──
 const getBusinessName = createServerFn({ method: "GET" }).handler(async () => {
   try {
     const cfg = JSON.parse(await readFile("site.json", "utf8")) as {
