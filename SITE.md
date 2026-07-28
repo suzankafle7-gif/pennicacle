@@ -1,6 +1,6 @@
-# Your site
 
-This is the team's website. It's a [TanStack Start](https://tanstack.com/start)
+
+ It's a [TanStack Start](https://tanstack.com/start)
 app (React + Vite + Tailwind), served on **port 3000**. It starts life as a simple
 "coming soon" placeholder (the headline reads the business name from `site.json` at
 request time), but it's a real full-stack framework — build it out into the real
