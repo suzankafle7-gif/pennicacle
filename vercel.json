@@ -1,11 +1,6 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "functions": {
-    "server/server.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     { "source": "/(.*)", "destination": "/server/server.js" }
   ]
