@@ -189,4 +189,4 @@ function Home() {
 
   return (
     <div className="min-h-dvh">
-      {/* ─── Hero
+      {*/ ─── Hero
