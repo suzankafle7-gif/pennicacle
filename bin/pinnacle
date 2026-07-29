@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Pinnacle CLI shim — delegates to the Bun TypeScript entry point.
+# Usage: pinnacle [--dir <path>] [--model <name>] "<task description>"
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
+exec bun run "$PROJECT_DIR/src/cli.ts" "$@"

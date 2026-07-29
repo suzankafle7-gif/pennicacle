@@ -1,0 +1,17 @@
+{
+  "name": "pinnacle-engine",
+  "version": "0.1.0",
+  "description": "Pinnacle CLI — an agentic AI coding agent that plans, codes, debugs, and ships autonomously",
+  "type": "module",
+  "bin": {
+    "pinnacle": "./bin/pinnacle"
+  },
+  "scripts": {
+    "check": "tsc --noEmit",
+    "dev": "bun run src/cli.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.7.0"
+  }
+}
