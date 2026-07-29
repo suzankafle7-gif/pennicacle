@@ -14,9 +14,9 @@ mkdir -p .run
 # The workspace starts as sources only (the coming-soon placeholder serves from
 # the image's pre-built copy), so the first publish installs deps here. No-op
 # once node_modules is current.
-bun install
-bun run build
-setsid nohup bun run start > .run/server.log 2>&1 < /dev/null &
+command -v bun >/dev/null 2>&1 && bun install || npm install --no-audit --no-fund
+command -v bun >/dev/null 2>&1 && bun run build || npm run build
+setsid nohup npm run start > .run/server.log 2>&1 < /dev/null &
 
 # Wait for the new server to actually answer before reporting success, so a
 # startup crash surfaces here instead of silently leaving the old page live.

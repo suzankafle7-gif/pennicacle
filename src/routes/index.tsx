@@ -2,13 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { readFile, writeFile } from "node:fs/promises";
-import { createStartHandler } from '@tanstack/react-start/server'
-import { getRouterManifest } from '@tanstack/react-start/router-manifest'
-
-export default createStartHandler({
-  createRouter: () => import('../router').then((m) => m.createRouter()),
-  getRouterManifest,
-})
 
 // ── Server: read business name ──
 const getBusinessName = createServerFn({ method: "GET" }).handler(async () => {

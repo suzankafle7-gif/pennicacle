@@ -17,21 +17,23 @@ umask 002
 
 : "${VERCEL_TOKEN:?set VERCEL_TOKEN (collect it from the owner first)}"
 PROJECT_NAME="${VERCEL_PROJECT_NAME:-$(basename "$(pwd)")}"
-VERCEL="bunx vercel@latest"
+VERCEL="npx --yes vercel@latest"
 
 # Resolve the token's team (slug for --scope, id for the make-public API call).
 # Empty for a personal-account token. bun is always present in the sandbox.
 if [ -z "${VERCEL_SCOPE:-}" ] || [ -z "${VERCEL_TEAM_ID:-}" ]; then
-  RESOLVED="$(VERCEL_TOKEN="$VERCEL_TOKEN" bun -e '
+  RESOLVED="$(VERCEL_TOKEN="$VERCEL_TOKEN" node -e '
     const h = { headers: { Authorization: "Bearer " + process.env.VERCEL_TOKEN } };
-    const [u, tj] = await Promise.all([
-      fetch("https://api.vercel.com/v2/user", h).then((r) => r.json()).catch(() => ({})),
-      fetch("https://api.vercel.com/v2/teams?limit=50", h).then((r) => r.json()).catch(() => ({})),
-    ]);
-    const teams = tj.teams || [];
-    const def = (u.user || u || {}).defaultTeamId;
-    const t = teams.find((x) => x.id === def) || teams[0];
-    if (t) process.stdout.write(t.id + " " + t.slug);
+    (async () => {
+      const [u, tj] = await Promise.all([
+        fetch("https://api.vercel.com/v2/user", h).then((r) => r.json()).catch(() => ({})),
+        fetch("https://api.vercel.com/v2/teams?limit=50", h).then((r) => r.json()).catch(() => ({})),
+      ]);
+      const teams = tj.teams || [];
+      const def = (u.user || u || {}).defaultTeamId;
+      const t = teams.find((x) => x.id === def) || teams[0];
+      if (t) process.stdout.write(t.id + " " + t.slug);
+    })();
   ' 2>/dev/null || true)"
   VERCEL_TEAM_ID="${VERCEL_TEAM_ID:-${RESOLVED%% *}}"
   [ "$RESOLVED" != "${RESOLVED#* }" ] && VERCEL_SCOPE="${VERCEL_SCOPE:-${RESOLVED##* }}"
