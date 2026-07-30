@@ -41,6 +41,30 @@ function RootDocument({ children }: { children: ReactNode }) {
         <HeadContent />
       </head>
       <body className="bg-gray-950 text-gray-100 antialiased">
+        <nav className="border-b border-gray-800 px-6 py-4">
+          <div className="mx-auto flex max-w-6xl items-center justify-between">
+            <a
+              href="/"
+              className="font-mono text-sm font-medium tracking-widest text-violet-400 uppercase"
+            >
+              Pinnacle
+            </a>
+            <div className="flex gap-6">
+              <a
+                href="/"
+                className="text-sm text-gray-400 hover:text-white transition"
+              >
+                Home
+              </a>
+              <a
+                href="/playground"
+                className="text-sm text-gray-400 hover:text-white transition"
+              >
+                Playground
+              </a>
+            </div>
+          </div>
+        </nav>
         {children}
         <Scripts />
       </body>
